@@ -10,7 +10,7 @@
         <v-list-tile-title v-show="!beginEdit">
           <span >{{model.name}}</span>
         </v-list-tile-title>
-        <input v-show="beginEdit" @click.stop="" :ref="model.id" v-model="model.name"
+          <input v-show="beginEdit" @click.stop="" :ref="model.id" v-model="model.name"
                @blur="afterEdit" @keydown.enter="afterEdit"/>
       </v-list-tile-content>
       <v-list-tile-action v-if="isEdit">
@@ -177,6 +177,23 @@
         this.$nextTick(() => this.$refs[this.model.id].focus());
       },
       afterEdit() {
+        if(this.model.id==0){
+            alert("添加")
+          //执行添加
+          this.$http.post("/item/category/add",this.model).then(resp=>{
+            console.log(resp)
+          }).catch(e=>{
+            console.log(e)
+          })
+        }else{
+          //执行保存修改
+          alert("修改")
+          this.$http.put("/item/category/modify",this.model).then(resp=>{
+            console.log(resp)
+          }).catch(e=>{
+            console.log(e)
+          })
+        }
         if (this.model.beginEdit) {
           this.beginEdit = false;
           this.handleEdit(this.model.id, this.model.name);
@@ -187,6 +204,12 @@
       },
       handleDelete(id) {
         this.$emit("handleDelete", id);
+        this.$http.delete("/item/category/del?pid="+this.model.id)
+                              .then(resp => {
+                              console.log(resp)
+                            }).catch( e => {
+                              console.log(e);
+                            });
       },
       handleEdit(id, name) {
         this.$emit("handleEdit", id, name)
