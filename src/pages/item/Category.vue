@@ -29,6 +29,7 @@
         console.log("edit... id: " + id + ", name: " + name)
       },
       handleDelete(id) {
+      console.log("category delete.....")
         console.log("delete ... " + id)
       },
       handleClick(node) {

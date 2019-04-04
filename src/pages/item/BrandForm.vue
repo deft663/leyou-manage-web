@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" ref="myBrandForm">
+  <v-form v-model="valid" ref="myBrandForm" >
     <v-text-field v-model="brand.name" label="请输入品牌名称" required :rules="nameRules"/>
     <v-text-field v-model="brand.letter" label="请输入品牌首字母" required :rules="letterRules"/>
     <v-cascader

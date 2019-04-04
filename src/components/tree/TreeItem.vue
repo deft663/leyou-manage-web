@@ -167,6 +167,12 @@
           type: 'warning'
         }).then(() => {
           this.handleDelete(this.model.id);
+          this.$http.delete("/item/category/del?pid="+this.model.id)
+                                        .then(resp => {
+                                        console.log(resp)
+                                      }).catch( e => {
+                                        console.log(e);
+                                      });
         }).catch(()=>{
           this.$message.info('已取消删除');
         })
@@ -203,13 +209,8 @@
         this.$emit("handleAdd", node);
       },
       handleDelete(id) {
+        console.log("treeitem delete....."+id)
         this.$emit("handleDelete", id);
-        this.$http.delete("/item/category/del?pid="+this.model.id)
-                              .then(resp => {
-                              console.log(resp)
-                            }).catch( e => {
-                              console.log(e);
-                            });
       },
       handleEdit(id, name) {
         this.$emit("handleEdit", id, name)
