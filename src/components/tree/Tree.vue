@@ -61,6 +61,7 @@
         this.$emit("handleEdit", id, name)
       },
       handleDelete(id) {
+      console.log("tree delete.....")
         this.deleteById(id, this.db);
         this.$emit("handleDelete", id);
       },
