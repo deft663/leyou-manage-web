@@ -109,7 +109,7 @@
       value:{
         deep:true,
         handler(val,oldVal){
-    
+
           if (this.multiple) {
             this.fileList = val.map(f => {
               return {response: f,url:f}
