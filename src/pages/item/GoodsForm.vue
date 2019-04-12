@@ -63,8 +63,8 @@
           <v-card class="my-2">
             <v-container grid-list-md fluid>
             <v-layout wrap row justify-space-between class="px-5">
-              <v-flex xs12 sm5 v-for="param in specs" :key="param.name">
-                <v-text-field :label="param.name" v-model="param.v" :suffix="param.unit || ''"
+              <v-flex xs12 sm5 v-for="param in specs" :key="param.pName">
+                <v-text-field :label="param.pName" v-model="param.v" :suffix="param.unit || ''"
                  />
               </v-flex>
             </v-layout>
@@ -295,15 +295,15 @@ export default {
               // 对特有规格进行筛选
               const arr1 = [];
               const arr2 = [];
-              data.forEach(({id, name,generic, numeric, unit }) => {
+              data.forEach(({id, pName,generic, numeric, unit }) => {
                 if(generic){
-                  const o = { id, name, numeric, unit};
+                  const o = { id, pName, numeric, unit};
                   if(this.isEdit){
                     o.v = specs[id];
                   }
                   arr1.push(o)
                 }else{
-                  const o = {id, name, options:[]};
+                  const o = {id, pName, options:[]};
                   if(this.isEdit){
                     o.options = template[id];
                   }

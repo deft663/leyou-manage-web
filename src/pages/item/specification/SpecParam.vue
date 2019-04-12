@@ -141,8 +141,10 @@ export default {
         this.show = true;
     },
     addParam() {
+      //标记为添加操作
+      this.isEdit=false;
       this.param = {
-          cid: this.group.cid,
+          categoryId: this.group.categoryId,
           groupId: this.group.id,
           segments:[],
           numeric:false,
@@ -156,6 +158,7 @@ export default {
             this.$http.delete("/item/spec/param/" + id)
             .then(() => {
                 this.$message.success("删除成功");
+                this.loadData();
             })
             .catch(() => {
                 this.$message.error("删除失败");
@@ -168,10 +171,11 @@ export default {
     save(){
         const p = {};
         Object.assign(p, this.param);
+        console.log(this.param)
         p.segments = p.segments.map(s => s.join("-")).join(",")
         this.$http({
             method: this.isEdit ? 'put' : 'post',
-            url: '/item/spec/param',
+            url: '/item/spec/params',
             data: p,
         }).then(() => {
             // 关闭窗口
